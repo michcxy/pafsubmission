@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div data-th-object="${brewery}">
+        <h1><span data-th-text=*{name}></h1>
+            <a th:href="@{/}">
+                <button>Back</button>
+              </a>
+        <br>
+        <br>
+        Description: <span data-th-text="*{description}"></span> 
+        <br>
+        Address: <span data-th-text="*{address1}"></span>
+        <br>
+        Phone: <span data-th-text="*{phone}"></span>
+        <br>
+        Website: <a target="_blank" data-th-href="@{*{website}}"><span>Go</span></a>
+    </div>
+   
+    <h3>Beers</h3>
+    
+    <div>
+    <form method="POST" data-th-action="@{/brewery/{breweryId}/order}">
+		<table border="1">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Description</th>
+                    <th>Quantity</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr data-th-each="beer: ${brewery.beers}" data-th-object="${beer}">
+					<td>
+						<span data-th-text="*{beerName}"></span> 
+					</td>
+					<td>
+						<span data-th-text="*{beerDescription}"></span>
+					</td>
+                    <td>
+                        <span><input type="text" size="5" data-th-name="*{beerId}"/></span>
+					</td>
+				</tr>
+			</tbody> 
+		</table>
+        <br>
+        <button type="submit">Place Order</button>
+    </form>
+    </div>
+</body>
+</html>
